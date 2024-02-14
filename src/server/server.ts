@@ -1,11 +1,13 @@
 import express from "express";
 import cors from "cors";
 import routes from "./routes";
+import config from "./config"; 
 
 const isProduction = process.env.NODE_ENV === "production";
 const isDevelopment = process.env.NODE_ENV === "development";
 
 const app = express();
+app.use(express.json());
 
 if (isDevelopment) {
     app.use(cors());
@@ -23,5 +25,5 @@ if (isProduction) {
     });
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = config.port;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -10,8 +10,8 @@ const pool = mysql.createPool({
 });
 
 // Removed the generic type <T = any> since it was not being utilized in a meaningful way in this context
-export const Query = (query: string, values?: any) => {
-    return new Promise((resolve, reject) => {
+export const Query = <T =any>(query: string, values?: any) => {
+    return new Promise<T>((resolve, reject) => {
         pool.query(query, values, (err, results) => {
             if (err) { 
                 reject(err);
